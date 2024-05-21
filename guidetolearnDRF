@@ -1,0 +1,11 @@
+- api guide: view      (https://www.django-rest-framework.org/api-guide/views/)
+   - Function based view
+
+1.serialisation : tutorial -> 1-Serialisation
+   - serializer: api-guide->serilizer
+   - Serializer fields: api-guide -> Serializer fields
+2.status code: api-guide status Code
+3.validation: api-guide->serilizer -> validation 
+    1. field Level
+    2. object Level
+    3. validator
