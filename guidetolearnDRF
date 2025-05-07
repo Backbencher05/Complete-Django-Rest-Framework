@@ -1,11 +1,27 @@
-- api guide: view      (https://www.django-rest-framework.org/api-guide/views/)
+0. - api guide: view      (https://www.django-rest-framework.org/api-guide/views/)
    - Function based view
 
-1.serialisation : tutorial -> 1-Serialisation
+1. serialisation : tutorial -> 1-Serialisation
    - serializer: api-guide->serilizer
    - Serializer fields: api-guide -> Serializer fields
-2.status code: api-guide status Code
-3.validation: api-guide->serilizer -> validation 
+
+2. status code: api-guide status Code
+
+3. validation: api-guide->serilizer -> validation 
     1. field Level
     2. object Level
     3. validator
+
+
+4. Class Based view
+   - api guide --> view --> class based view 
+      https://www.django-rest-framework.org/api-guide/views/
+   -  https://www.django-rest-framework.org/tutorial/3-class-based-views/
+
+5. Relationships in models 
+   https://docs.djangoproject.com/en/5.0/topics/db/examples/
+
+
+6. Nested Serializations / Serializations Relations
+   
+
