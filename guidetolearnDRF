@@ -1,4 +1,8 @@
+DRF: https://www.youtube.com/playlist?list=PLgPJX9sVy92xsFOL909CyObpqx7FoCh1Y
+
 0. - api guide: view      (https://www.django-rest-framework.org/api-guide/views/)
+
+- api guide: view      (https://www.django-rest-framework.org/api-guide/views/)
    - Function based view
 
 1. serialisation : tutorial -> 1-Serialisation
