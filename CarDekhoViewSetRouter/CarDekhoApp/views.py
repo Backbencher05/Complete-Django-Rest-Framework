@@ -31,10 +31,15 @@ from rest_framework import status
 
 
 # Model View Set 
+# we can perform all the CRUD operation without wtiting  
+    # def list(self,request):
+    # def retrieve(self,request,pk=None): etc..
 
 # class Showroom_Viewset(viewsets.ModelViewSet):
 #     queryset = ShowroomList.objects.all()
 #     serializer_class = ShowroomSerializer
+
+
 
 class Showroom_Viewset(viewsets.ReadOnlyModelViewSet):
     queryset = ShowroomList.objects.all()

@@ -43,3 +43,26 @@ class ReviewLists(generics.ListCreateAPIView):
 class ReviewDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+"""
+now we don't have to write extra code like 
+    def get():
+        ....
+        ...
+    def post():
+        ....
+        ....
+these lines are enough, if we are using concreate View classes
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+behind the scene in using using this only 
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args,**kwargs)
+    
+    def post(self,request,*args,**kwargs):
+        return self.create(request,*args,*kwargs)
+
+https://github.com/encode/django-rest-framework/blob/master/rest_framework/generics.py
+search any functions like , ListCreateAPIView etc.
+"""

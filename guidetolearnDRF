@@ -16,6 +16,14 @@ DRF: https://www.youtube.com/playlist?list=PLgPJX9sVy92xsFOL909CyObpqx7FoCh1Y
     2. object Level
     3. validator
 
+-  Model Serializer
+   - serializer: api-guide->serilizer
+   https://www.django-rest-framework.org/api-guide/serializers/#modelserializer
+
+   https://github.com/encode/django-rest-framework/blob/master/rest_framework/serializers.py
+
+- Serializer fields
+   https://www.django-rest-framework.org/api-guide/fields/
 
 4. Class Based view
    - api guide --> view --> class based view 
@@ -27,5 +35,31 @@ DRF: https://www.youtube.com/playlist?list=PLgPJX9sVy92xsFOL909CyObpqx7FoCh1Y
 
 
 6. Nested Serializations / Serializations Relations
-   
+   https://www.django-rest-framework.org/api-guide/relations/
 
+7. Authentication and permission
+   https://www.django-rest-framework.org/api-guide/authentication/
+   https://www.django-rest-framework.org/api-guide/permissions/
+
+8. Session Authentication and permission
+   https://www.django-rest-framework.org/api-guide/authentication/#sessionauthentication
+
+9. Generic API view and Mixin
+   https://www.django-rest-framework.org/api-guide/generic-views/
+
+10. Django Model Permission
+   https://www.django-rest-framework.org/api-guide/permissions/#isauthenticatedorreadonly
+
+12. Concrete View classes
+   https://www.django-rest-framework.org/api-guide/generic-views/#concrete-view-classes
+
+13. View Set and Routers
+   https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/
+   https://www.django-rest-framework.org/api-guide/viewsets/
+   https://www.django-rest-framework.org/api-guide/routers/
+
+14. Model View Set
+   https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset
+
+   https://github.com/encode/django-rest-framework/blob/master/rest_framework/viewsets.py
+   search: Model View Set

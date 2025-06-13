@@ -42,7 +42,8 @@ from ..models import CarList
         # instance.name etc. is : old data 
         # validated_data is: new data 
 
-
+#-> Model serializers
+# here create() and update() method implimentation already provided we don't need to write manually 
 # we can use here model serializers
 # all these things Model Serializer will hide 
 # class CarSerializer(serializers.ModelSerializer):
@@ -53,6 +54,7 @@ from ..models import CarList
         # exclude = ['name']
 
 class CarSerializer(serializers.ModelSerializer):
+    # custom serializers field 
     # discounted_price = serializers.SerializerMethodField()
     class Meta:
         model = CarList
