@@ -58,9 +58,6 @@ class EmployeeDetailsCBV4(View):
         json_data = serialize('json', [emp,])
         return HttpResponse(json_data,content_type='application/json')
 
-
-
-@method_decorator(csrf_exempt, name='dispatch')   #Disable CSRF varification         
 class EmployeeDetailsCBV2(View,HttpResponseMixin):
     def get(self,request,id,*args,**kwargs):
         try:
@@ -74,58 +71,7 @@ class EmployeeDetailsCBV2(View,HttpResponseMixin):
             json_data = serialize('json',[emp,]) #can you convert this list of employee into json  
             return HttpResponse(json_data,content_type='application/json', status =200)
 
-    # Update Information 
-    def put(self,request,id,*args, **kwargs):
-        # check if object is available with this id 
-        emp = get_object_by_id(id=id)
-        if emp is None:
-            json_data = json.dumps({'msg': 'No Matched Resourece Found, Not possible to perform Updation '})
-            return self.response_message(json_data,status=404)
-        # if emp exist/present 
-        data = request.body
-        print(data)
-        valid_json = is_json(data)
-        if not valid_json:
-            json_data = json.dumps({'msg': 'Please send the valid Data'})
-            return self.response_message(json_data,status=400)
-        # if valid json data, convert it into python 
-        provided_data = json.loads(data) #convert into python dict 
-        original_data = {
-            'eno': emp.eno,
-            'ename': emp.ename,
-            'esal': emp.esal,
-            'eadd': emp.eadd,
-
-        }
-        original_data.update(provided_data) #dict opration
-        form = EmployeeForm(original_data, instance=emp) # if we are not passing "instance" than it will create new object 
-        if form.is_valid():
-            form.save(commit=True)  
-            json_data = json.dumps({'msg': 'Resource Updated Successfully'}) 
-            return self.response_message(json_data)
-        if form.errors:
-            json_data = json.dumps(form.errors) 
-            return self.response_message(json_data,status=400)
-        
-    def delete(self,request,id,*args,**kwargs):
-        # check if object is available with this id 
-        emp = get_object_by_id(id=id)
-        if emp is None:
-            json_data = json.dumps({'msg': 'No Matched Resourece Found, Not possible to perform Deletion '})
-            return self.response_message(json_data,status=404)
-        
-        # t=emp.delete()
-        # # The return type of ,emp.delete is a tuple
-        # # it contain 2-value 1. status 2.deleted-item
-        # # o/p: (1, {'testapp.Employee': 1})
-        # print(t)
-        status, deleted_item = emp.delete()
-        if status == 1:
-            json_data = json.dumps({'msg': 'Resource Deleted sucessfully '})
-            return self.response_message(json_data)
-        json_data = json.dumps({'msg': 'Unable to Delete...plz try again '})
-        return self.response_message(json_data,status=404)
-        
+      
     
 # How to add status code to the response 
         #  return HttpResponse(json_data,content_type='application/json', status =200)
@@ -204,6 +150,7 @@ class EmployeeListCBV3(SerializeMixin, HttpResponseMixin,View):
         # python manage.py dumpdata testapp.Employee --format YAML > emp.xml --indent 4
 
 
+# POST Method
 
 # while in POST method we must have to handle/varify the CSRF 
         # 3-ways are available 
@@ -253,14 +200,19 @@ class EmployeeListCBV3(SerializeMixin, HttpResponseMixin,View):
     # def post(self,request,*args, **kwargs):
     #     json_data = json.dumps({'msg': 'This is from post method'})
     #     return self.response_message(json_data)
-
+    """
+    post() Method Logic: 
+     Inside post method we can access data sent by partner application by using 
+    "request.body". 
+     First we have to check whether this data is json or not.
+    """
     def post(self,request,*args, **kwargs):
         data = request.body
         valid_json = is_json(data)
         if not valid_json:
             json_data = json.dumps({'msg': 'Please send the valid Data'})
             return self.response_message(json_data,status=400)
-        
+        # if data is valid , get the data and save, we are getting json data, so first convert and then save
         # Now to save this data we required Form(model form )
         # json_data = json.dumps({'msg': 'You have sended  the valid Data'})
         empdata = json.loads(data) # convert data into python 
@@ -273,7 +225,71 @@ class EmployeeListCBV3(SerializeMixin, HttpResponseMixin,View):
             json_data = json.dumps(form.errors) 
             return self.response_message(json_data,status=400)
         
-
+# PUT and DELETE
         
+@method_decorator(csrf_exempt, name='dispatch')   #Disable CSRF varification         
+class EmployeeDetailsCBV2(View,HttpResponseMixin):
+    def get(self,request,id,*args,**kwargs):
+        try:
+            emp = Employee.objects.get(id=id) 
+        except Employee.DoesNotExist:
+            json_data = json.dumps({'msg': 'The requested resource not available'})
+            return HttpResponse(json_data,content_type='application/json', status =404)
 
- 
+        # if there is no exceptions 
+        else:
+            json_data = serialize('json',[emp,]) #can you convert this list of employee into json  
+            return HttpResponse(json_data,content_type='application/json', status =200)
+
+    # Update Information 
+    def put(self,request,id,*args, **kwargs):
+        # check if object is available with this id 
+        emp = get_object_by_id(id=id)
+        if emp is None:
+            json_data = json.dumps({'msg': 'No Matched Resourece Found, Not possible to perform Updation '})
+            return self.response_message(json_data,status=404)
+        # if emp exist/present 
+        data = request.body
+        print(data)
+        valid_json = is_json(data)
+        if not valid_json:
+            json_data = json.dumps({'msg': 'Please send the valid Data'})
+            return self.response_message(json_data,status=400)
+        # if valid json data, convert it into python 
+        provided_data = json.loads(data) #convert into python dict 
+        original_data = {
+            'eno': emp.eno,
+            'ename': emp.ename,
+            'esal': emp.esal,
+            'eadd': emp.eadd,
+
+        }
+        original_data.update(provided_data) #dict opration
+        form = EmployeeForm(original_data, instance=emp) # if we are not passing "instance" than it will create new object 
+        if form.is_valid():
+            form.save(commit=True)  
+            json_data = json.dumps({'msg': 'Resource Updated Successfully'}) 
+            return self.response_message(json_data)
+        if form.errors:
+            json_data = json.dumps(form.errors) 
+            return self.response_message(json_data,status=400)
+        
+    def delete(self,request,id,*args,**kwargs):
+        # check if object is available with this id 
+        emp = get_object_by_id(id=id)
+        if emp is None:
+            json_data = json.dumps({'msg': 'No Matched Resourece Found, Not possible to perform Deletion '})
+            return self.response_message(json_data,status=404)
+        
+        # t=emp.delete()
+        # # The return type of ,emp.delete is a tuple
+        # # it contain 2-value 1. status 2.deleted-item
+        # # o/p: (1, {'testapp.Employee': 1})
+        # print(t)
+        status, deleted_item = emp.delete()
+        if status == 1:
+            json_data = json.dumps({'msg': 'Resource Deleted sucessfully '})
+            return self.response_message(json_data)
+        json_data = json.dumps({'msg': 'Unable to Delete...plz try again '})
+        return self.response_message(json_data,status=404)
+  
