@@ -45,6 +45,8 @@ DRF: https://www.youtube.com/playlist?list=PLgPJX9sVy92xsFOL909CyObpqx7FoCh1Y
    https://www.django-rest-framework.org/api-guide/authentication/#sessionauthentication
 
 9. Generic API view and Mixin
+   - first read: tutorial/3-class-based-views/#using-mixins
+   https://www.django-rest-framework.org/tutorial/3-class-based-views/#using-mixins
    https://www.django-rest-framework.org/api-guide/generic-views/
 
 10. Django Model Permission
